@@ -1,6 +1,5 @@
 const connection = require('../config/connection');
 const { Users, Thoughts} = require('../models');
-const { getRandomName, getRandomAssignments } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -14,39 +13,54 @@ connection.once('open', async () => {
   await Thoughts.deleteMany({});
 
   // Create empty array to hold the students
-  const users = [];
+  const users = [
+    {
+      "username": "lernantino",
+      "email": "lernantino@gmail.com"
+    }, 
+    {
+      "username": "michael33",
+      "email": "michael33@gmail.com"
+    }, 
+    {
+      "username": "genaSchool",
+      "email": "genaschool@gmail.com"
+    }, 
+    {
+      "username": "naruto",
+      "email": "naruto@gmail.com"
+    }
+  ];
 
   // Get some random assignment objects using a helper function that we imported from ./data
-  const thoughts = getRandomAssignments(20);
+  const thoughts = [
+    {
+      "thoughtText": "Here's a cool thought...",
+      "username": "lernantino",
+    },   
+    {
+      "thoughtText": "I am s great instructor",
+      "username": "michael33",
+    }, 
+    {
+      "thoughtText": "Graduating is though",
+      "username": "genaSchool",
+    }, 
+    { 
+      "thoughtText": "I love Sasugay!",
+      "username": "naruto",
+    }
+  ];
 
-  // Loop 20 times -- add students to the students array
-  for (let i = 0; i < 20; i++) {
-    const username = getRandomName();
-    const email = fullName.split(' ')[0];
-    const thoughts = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
-    const friends = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
+  // Add users to the collection and await the results
+  await Users.collection.insertMany(users);
 
-    users.push({
-      username,
-      email,
-      friends,
-      thoughts,
-    });
-  }
-
-  // Add students to the collection and await the results
-  await Student.collection.insertMany(students);
-
-  // Add courses to the collection and await the results
-  await Course.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
-  });
+  // Add thoughts to the collection and await the results
+  await Thoughts.collection.insertMany(thoughts);
 
   // Log out the seed data to indicate what should appear in the database
-  console.table(students);
-  console.table(assignments);
+  console.table(users);
+  console.table(thoughts);
   console.info('Seeding complete! 🌱');
   process.exit(0);
 });

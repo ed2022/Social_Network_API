@@ -17,11 +17,11 @@ const {
 //GET/api/users - we want to be able to display and creat to the user route 
 router.route('/').get(getUsers).post(createUser);
 
-//To the following of get/put/delete- /:userID 
-router.route('/:userID').get(getSingleUser).put(updateUser).delete(deleteUser);
+//To the following of get/put/delete- /:userId 
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 //Lastly we are going to delete/add friend by friend ID
-router.route("/:userID/friends/:friendID").post(addFriend).delete(removeFriend);
+router.route("/:userId/friends/:friendID").post(addFriend).delete(removeFriend);
 
 module.exports = router;
 
