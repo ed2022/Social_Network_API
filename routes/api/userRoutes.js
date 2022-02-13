@@ -20,8 +20,8 @@ router.route('/').get(getUsers).post(createUser);
 //To the following of get/put/delete- /:userId 
 router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
-//Lastly we are going to delete/add friend by friend ID
-router.route("/:userId/friends/:friendID").post(addFriend).delete(removeFriend);
+//Lastly we are going to delete/add friend by friend Id
+router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
 
 module.exports = router;
 

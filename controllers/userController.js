@@ -15,7 +15,7 @@ const userController = {
       .populate('friends')
       .then((users) =>
         !users
-          ? res.status(404).json({ message: 'No users with that ID' })
+          ? res.status(404).json({ message: 'No users with that Id' })
           : res.json(users)
       )
       .catch((err) => res.status(500).json(err));
@@ -48,7 +48,7 @@ const userController = {
     Users.findOneAndDelete({ _id: req.params.userId })
       .then((users) =>
         !users
-          ? res.status(404).json({ message: 'No users with that ID' })
+          ? res.status(404).json({ message: 'No users with that Id' })
           : Users.deleteMany({ _id: { $in: users.students } })
       )
       .then(() => res.json({ message: 'Users and students deleted!' }))
@@ -58,7 +58,7 @@ const userController = {
   addFriend(req, res) {
       Users.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friends: req.params.friendID } },
+        { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       )
       .then((users) => res.json(users))
@@ -76,7 +76,7 @@ const userController = {
     )
       .then((users) =>
         !users
-          ? res.status(404).json({ message: 'No users with that ID' })
+          ? res.status(404).json({ message: 'No users with that Id' })
           : res.json(users)
       )
       .catch((err) => res.status(500).json(err));

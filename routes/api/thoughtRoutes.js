@@ -17,11 +17,11 @@ const {
 //GET/api/thoughts - we want to be able to display and creat to the thought route 
 router.route('/').get(getThoughts).post(createThoughts);
 
-//To the following of get/put/delete- /:thoughtID 
-router.route('/:thoughtID').get(getSingleThought).put(updateThought).delete(deleteThought);
+//To the following of get/put/delete- /:thoughtId 
+router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
 
-//Lastly we are going to delete/add reaction by reactionID
-router.route("/:thoughtID/reactions").post(addReaction).delete(deleteReaction);
+//Lastly we are going to delete/add reaction by reactionId
+router.route("/:thoughtId/reactions").post(addReaction).delete(deleteReaction);
 
 module.exports = router;
 
