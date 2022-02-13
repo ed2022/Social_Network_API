@@ -3,10 +3,10 @@ const moment = require('moment');
 
 const reactionsSchema = new Schema(
   {
-    reactionId: {
-      type: Schema.Types.ObjectId, //MDB and sets renames the Id 
-      default: () => new Types.ObjectId(), //id type
-    },
+    // reactionId: {
+    //   type: Schema.Types.ObjectId, //MDB and sets renames the Id 
+    //   default: () => new Types.ObjectId(), //id type
+    // },
     reactionBody: {
       type: String,
       required: true,
@@ -58,6 +58,6 @@ thoughtsSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', thoughtsSchema);
+const Thoughts = model('Thoughts', thoughtsSchema);
 
-module.exports = Thought;
+module.exports = Thoughts;
