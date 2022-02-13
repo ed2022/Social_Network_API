@@ -1,6 +1,6 @@
 const {Users} = require('../models');
 
-module.exports = {
+const userController = {
   // Get all Users
   getUsers(req, res) {
     Users.find()
@@ -8,9 +8,10 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Get a users
-  getSingleUsers(req, res) {
-    Users.findOne({ _id: req.params.usersId })
+  getSingleUser(req, res) {
+    Users.findOne({ _id: req.params.userID })
       .select('-__v')
+      .populate('thoughts')
       .then((users) =>
         !users
           ? res.status(404).json({ message: 'No users with that ID' })
@@ -19,7 +20,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Create a users
-  createUsers(req, res) {
+  createUser(req, res) {
     Users.create(req.body)
       .then((users) => res.json(users))
       .catch((err) => {
@@ -28,9 +29,9 @@ module.exports = {
       });
   },
   // Update a users
-  updateUsers(req, res) {
+  updateUser(req, res) {
     Users.findOneAndUpdate(
-      { _id: req.params.usersId },
+      { _id: req.params.userID },
       { $set: req.body },
       { runValidators: true, new: true }
     )
@@ -42,8 +43,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Delete a users
-  deleteUsers(req, res) {
-    Users.findOneAndDelete({ _id: req.params.usersId })
+  deleteUser(req, res) {
+    Users.findOneAndDelete({ _id: req.params.userID })
       .then((users) =>
         !users
           ? res.status(404).json({ message: 'No users with that ID' })
@@ -53,7 +54,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
    // Create a friends--Need more work
-  createFriends(req, res) {
+  addFriend(req, res) {
     Users.create(req.body)
       .then((users) => res.json(users))
       .catch((err) => {
@@ -62,8 +63,8 @@ module.exports = {
       });
   },
   // Delete a users
-  deleteFriends(req, res) {
-    Users.findOneAndDelete({ _id: req.params.usersId })
+  removeFriend(req, res) {
+    Users.findOneAndDelete({ _id: req.params.friendID })
       .then((users) =>
         !users
           ? res.status(404).json({ message: 'No users with that ID' })
@@ -73,3 +74,5 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 };
+
+module.exports = userController; 

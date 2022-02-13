@@ -1,14 +1,11 @@
+//Calling router from express
 const router = require('express').Router();
-const userRoutes = require('./users');
-const thoughtsRoutes = require('./thoughts');
-const friendsRoutes = require('./friends');
-const reactionsRoutes = require('./reactions');
-// const thoughtRoutes = require('./thoughts');
+//importing routes 
+const userRoutes = require('./userRoutes.js');
+const thoughtsRoutes = require('./thoughtRoutes.js');
 
 router.use('/users', userRoutes);
 router.use('/thoughts', thoughtsRoutes);
-router.use('/users/:userId/friends', friendsRoutes);
-router.use('/thoughts/:thoughtId/reactions', reactionsRoutes);
 // router.use('/thoughts', thoughtRoutes);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const reactionsSchema = new Schema(
   {
-    reactionId: {
+    reactionID: {
       type: Schema.Types.ObjectId, //MDB and sets renames the ID 
       default: () => new Types.ObjectId(), //id type
     },
@@ -21,7 +21,8 @@ const reactionsSchema = new Schema(
       default: Date.now,
       get: (timestamp) => moment(timestamp).format('MMM Do, YYYY [at] hh:mm a'),
     }
-  }
+  },
+  { toJSON: {getters: true,}}
 );
 
 // Schema to create thought Model
@@ -47,10 +48,15 @@ const thoughtsSchema = new Schema(
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
     id: false  
   }
 );
+
+thoughtsSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
 
 const Thought = model('Thought', thoughtsSchema);
 
